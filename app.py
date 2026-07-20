@@ -632,7 +632,7 @@ def markdown_body_to_html(body):
 # 1. Page Settings
 # =========================
 st.set_page_config(
-    page_title="رواء - منصة الأمن المائي الخليجي",
+    page_title="REWAA | AI-Powered Water Decision Intelligence",
     layout="wide"
 )
 
@@ -853,12 +853,13 @@ if not st.session_state.rewaa_intro_done:
         <div class="rewaa-splash">
             <div class="rewaa-splash-card">
                 <div class="rewaa-drop"></div>
-                <h1 class="rewaa-brand">رواء</h1>
-                <div class="rewaa-brand-en">REWAA</div>
-                <div class="rewaa-splash-subtitle">
-                    منصة ذكاء اصطناعي لدعم قرارات الأمن المائي الخليجي<br>
-                    <span style="font-size:.78em;direction:ltr;display:inline-block;margin-top:4px;">
-                        AI-powered intelligence for proactive water decisions
+                <h1 class="rewaa-brand">REWAA</h1>
+                <div class="rewaa-brand-en">WATER DECISION INTELLIGENCE</div>
+                <div class="rewaa-splash-subtitle" style="direction:ltr;">
+                    AI-Powered Water Decision Intelligence
+                    <br>
+                    <span style="font-size:.78em;display:inline-block;margin-top:4px;">
+                        Predictive insights and decision-ready recommendations for smarter water security
                     </span>
                 </div>
                 <div class="rewaa-ai-pill">✦ GCC Water Security Intelligence</div>
@@ -868,7 +869,7 @@ if not st.session_state.rewaa_intro_done:
         unsafe_allow_html=True,
     )
 
-    if st.button("دخول المنصة  |  Enter Platform", key="rewaa_enter_platform"):
+    if st.button("Enter Platform", key="rewaa_enter_platform"):
         st.session_state.rewaa_intro_done = True
         st.rerun()
 
@@ -880,11 +881,11 @@ if not st.session_state.rewaa_intro_done:
 with st.sidebar:
     st.markdown("""
 <div class="lang-label">
-اللغة / Language
+Language
 </div>
 """, unsafe_allow_html=True)
 
-    lang = st.radio("", ["العربية", "English"], horizontal=True)
+    lang = st.radio("", ["English", "العربية"], horizontal=True, format_func=lambda option: "English" if option == "English" else "Arabic", key="rewaa_language")
 
 # =========================
 # 3. Translation Dictionary
@@ -2473,7 +2474,7 @@ except Exception:
                     "الاستهلاك_اللتر": int(max(3500, value))
                 })
     df = pd.DataFrame(rows)
-    st.warning("تم تشغيل بيانات تجريبية موسمية لأن ملف rewaa_gcc_data.csv غير موجود أو فيه مشكلة.")
+    st.warning("Seasonal demo data is active because rewaa_gcc_data.csv is missing or could not be loaded." if lang == "English" else "تم تشغيل بيانات تجريبية موسمية لأن ملف rewaa_gcc_data.csv غير موجود أو فيه مشكلة.")
 
 # Preserve an un-clipped snapshot exclusively for the Verified Decision Agent.
 agent_source_df = df.copy(deep=True)
